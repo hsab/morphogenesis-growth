@@ -6,16 +6,34 @@
     <script type="text/javascript">
     	function move(){
         console.log('yop');
-        var circles = d3.selectAll("circle");
-        circles.data([200, 400])
-          .transition()
-          .duration(1500)
-            .attr("cx", function(d) { return d; })
-    	}
+        //var circles = d3.selectAll("circle");
+        //circles.data([200, 400])
+        //  .transition()
+        //  .duration(1500)
+        //    .attr("cx", function(d) { return d; })
+
+        var svgContainer = d3.selectAll("svg");
+
+        var lineData = [
+          { "x": 10,   "y": 10},
+          { "x": 40,  "y": 15},
+          { "x": 45,  "y": 35},
+        ];
+
+        var lineFunction = d3.line()
+          .x(function(d) { return d.x; })
+          .y(function(d) { return d.y; });
+
+        var lineGraph = svgContainer.append("path")
+          .attr("d", lineFunction(lineData))
+          .attr("stroke", "black")
+          .attr("stroke-width", 2)
+          .attr("fill", "none");
+        }
   	</script>
   </head>
   <body onload="move();" style="margin:0">
-    <svg width="500" height="500">
+    <svg width="700" height="700">
       <circle cx="50" cy="50" r="5" fill="black" />
       <circle cx="50" cy="150" r="5" fill="black" />
     </svg>
