@@ -7,15 +7,17 @@
     	function move(){
         console.log('yop');
         var circles = d3.selectAll("circle");
-        circles.transition()
+        circles.data([200, 400])
+          .transition()
           .duration(1500)
-          .style("cx", "200")
+            .attr("cx", function(d) { return d; })
     	}
   	</script>
   </head>
   <body onload="move();" style="margin:0">
     <svg width="500" height="500">
-      <circle cx="100" cy="100" r="5" fill="black" />
+      <circle cx="50" cy="50" r="5" fill="black" />
+      <circle cx="50" cy="150" r="5" fill="black" />
     </svg>
   </body>
 </html>
