@@ -2,13 +2,18 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
     <script type="text/javascript">
-    	function draw(){
-
+    	function move(){
+        console.log('yop');
+        var circles = d3.selectAll("circle");
+        circles.transition()
+          .duration(1500)
+          .style("cx", "200")
     	}
   	</script>
   </head>
-  <body onload="draw();" style="margin:0">
+  <body onload="move();" style="margin:0">
     <svg width="500" height="500">
       <circle cx="100" cy="100" r="5" fill="black" />
     </svg>
