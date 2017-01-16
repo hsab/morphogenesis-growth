@@ -12,7 +12,7 @@
         //  .duration(1500)
         //    .attr("cx", function(d) { return d; })
 
-        var svgContainer = d3.selectAll("svg");
+        var svgContainer = d3.select("svg");
 
         var lineData = [
           { "x": 10,   "y": 10},
@@ -29,7 +29,20 @@
           .attr("stroke", "black")
           .attr("stroke-width", 2)
           .attr("fill", "none");
-        }
+
+        lineData = [
+          { "x": 15,   "y": 90},
+          { "x": 30,  "y": 25},
+          { "x": 105,  "y": 55},
+        ];
+
+        svgContainer.selectAll("path")
+          .data(lineData)
+          .transition()
+          .duration(1000)
+          .attr("d", lineFunction(lineData));
+
+      }
   	</script>
   </head>
   <body onload="move();" style="margin:0">
