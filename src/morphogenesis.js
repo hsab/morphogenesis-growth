@@ -1,35 +1,41 @@
-var height = 700;
+var height = 500;
 var width = 700;
+var centerX = width / 2;
+var centerY = height / 2;
 
 var nodeRadius = 5;
 var shapeRadius = 100;
 var divisions = 10;
 
 var nodes = [];
+var circlesCoord = [];
 
 var Node = function(x, y) {
-    this.x = x;
-    this.y = y;
+  this.x = x;
+  this.y = y;
+
+  this.getCoord = function() {
+    return {"x": this.x, "y": this.y};
   }
+}
 
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height)
 
-for (var i=0; i<divisions; i++){
-  var x = shapeRadius * Math.cos(360/i + Math.random(-10, 10));
-  var y = shapeRadius * Math.sin(360/i + Math.random(-10, 10));
+for (var i=0; i<divisions; i++) {
+  var angle = i * 2 * Math.PI / divisions + Math.random() * 0.2 - 0.2
+  var x = centerX + shapeRadius * Math.cos(angle);
+  var y = centerY + shapeRadius * Math.sin(angle);
   var node = new Node(x, y);
   nodes.push(node);
 }
 
-console.log(nodes.length)
+for (var i=0; i<nodes.length; i++) {
+  circlesCoord.push(nodes[i].getCoord());
+}
 
-var circleData = [
-  { "x": 10,  "y": 10},
-  { "x": 40,  "y": 15},
-  { "x": 45,  "y": 35},
-];
+console.log(circlesCoord);
 
 //var lineFunction = d3.line()
 //  .x(function(d) { return d.x; })
@@ -42,7 +48,7 @@ var circleData = [
 //   .attr("fill", "none");
 
 var circles = svg.selectAll("circle")
-  .data(circleData)
+  .data(circlesCoord)
 .enter().append("circle")
   .attr("cx", function(d) { return d.x; })
   .attr("cy", function(d) { return d.y; })
