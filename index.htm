@@ -5,51 +5,64 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script type="text/javascript">
     	function move(){
-        console.log('yop');
-        //var circles = d3.selectAll("circle");
-        //circles.data([200, 400])
-        //  .transition()
-        //  .duration(1500)
-        //    .attr("cx", function(d) { return d; })
 
-        var svgContainer = d3.select("svg");
+        var height = 700;
+        var width = 700;
+        var radius = 5;
 
-        var lineData = [
-          { "x": 10,   "y": 10},
+        var svg = d3.select("body").append("svg")
+          .attr("width", width)
+          .attr("height", height)
+
+        var circleData = [
+          { "x": 10,  "y": 10},
           { "x": 40,  "y": 15},
           { "x": 45,  "y": 35},
         ];
 
-        var lineFunction = d3.line()
-          .x(function(d) { return d.x; })
-          .y(function(d) { return d.y; });
+        //var lineFunction = d3.line()
+        //  .x(function(d) { return d.x; })
+        //  .y(function(d) { return d.y; });
 
-        var lineGraph = svgContainer.append("path")
-          .attr("d", lineFunction(lineData))
-          .attr("stroke", "black")
-          .attr("stroke-width", 2)
-          .attr("fill", "none");
+        // var lineGraph = svgContainer.append("path")
+        //   .attr("d", lineFunction(lineData))
+        //   .attr("stroke", "black")
+        //   .attr("stroke-width", 2)
+        //   .attr("fill", "none");
 
-        lineData = [
-          { "x": 15,   "y": 90},
-          { "x": 30,  "y": 25},
-          { "x": 105,  "y": 55},
-          { "x": 175,  "y": 65},
-        ];
+        var circles = svg.selectAll("circle")
+          .data(circleData)
+        .enter().append("circle")
+          .attr("cx", function(d) { return d.x; })
+          .attr("cy", function(d) { return d.y; })
+          .attr("r", radius)
+          .attr("fill", "black");
 
-        svgContainer.selectAll("path")
-          .data(lineData)
-          .transition()
-          .duration(1000)
-          .attr("d", lineFunction(lineData));
+        console.log("yop!")
+
+        // lineData = [
+        //   { "x": 15,   "y": 90},
+        //   { "x": 30,  "y": 25},
+        //   { "x": 105,  "y": 55},
+        //   { "x": 175,  "y": 65},
+        // ];
+        //
+        // svgContainer.selectAll("path")
+        //   .data(lineData)
+        //   .transition()
+        //   .duration(1000)
+        //   .attr("d", lineFunction(lineData));
+        //
+        // svgContainer.selectAll("circle")
+        //   .data(lineData)
+        //   .transition()
+        //   .duration(1000)
+        //   .attr("cx", function(d) { return d.x; })
+        //   .attr("cy", function(d) { return d.y; });
 
       }
   	</script>
   </head>
   <body onload="move();" style="margin:0">
-    <svg width="700" height="700">
-      <circle cx="50" cy="50" r="5" fill="black" />
-      <circle cx="50" cy="150" r="5" fill="black" />
-    </svg>
   </body>
 </html>
