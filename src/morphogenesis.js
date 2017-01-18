@@ -1,10 +1,29 @@
 var height = 700;
 var width = 700;
-var radius = 5;
+
+var nodeRadius = 5;
+var shapeRadius = 100;
+var divisions = 10;
+
+var nodes = [];
+
+var Node = function(x, y) {
+    this.x = x;
+    this.y = y;
+  }
 
 var svg = d3.select("body").append("svg")
-  .attr("width", width)
-  .attr("height", height)
+    .attr("width", width)
+    .attr("height", height)
+
+for (var i=0; i<divisions; i++){
+  var x = shapeRadius * Math.cos(360/i + Math.random(-10, 10));
+  var y = shapeRadius * Math.sin(360/i + Math.random(-10, 10));
+  var node = new Node(x, y);
+  nodes.push(node);
+}
+
+console.log(nodes.length)
 
 var circleData = [
   { "x": 10,  "y": 10},
@@ -27,10 +46,8 @@ var circles = svg.selectAll("circle")
 .enter().append("circle")
   .attr("cx", function(d) { return d.x; })
   .attr("cy", function(d) { return d.y; })
-  .attr("r", radius)
+  .attr("r", nodeRadius)
   .attr("fill", "black");
-
-console.log("yop!")
 
 // lineData = [
 //   { "x": 15,   "y": 90},
